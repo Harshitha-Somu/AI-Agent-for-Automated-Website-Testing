@@ -1,0 +1,25 @@
+{
+  "id": "RUN_1766753801455",
+  "instruction": "open amazon and type bracelets",
+  "target": "https://www.amazon.com",
+  "status": "executed",
+  "duration": 61.34,
+  "total_steps": 2,
+  "passed_steps": 1,
+  "failed_steps": 1,
+  "step_results": [
+    {
+      "step": 1,
+      "action": "fill",
+      "status": "ok",
+      "screenshot": "/static/screenshots/run_1766753740117_step_1.png"
+    },
+    {
+      "step": 2,
+      "action": "press",
+      "status": "error",
+      "detail": "Page.screenshot: Timeout 30000ms exceeded.\nCall log:\n  - taking page screenshot\n  - waiting for fonts to load...\n  - fonts loaded\n",
+      "screenshot": "/static/screenshots/run_1766753740117_fail_2.png"
+    }
+  ]
+}

@@ -1,54 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Testing Agent – Natural Language Web Tests</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
+
 <body>
 
-<nav class="nav-bar" aria-label="Main navigation">
+<!-- NAVBAR 
+<nav class="nav-bar">
     <div class="nav-left">AI Testing Agent</div>
     <div class="nav-right">
         <a href="/" class="active">Home</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
     </div>
-</nav>
+</nav>-->
 
 <div class="container">
+
+    <!-- HERO SECTION -->
     <section class="hero">
-        <div class="hero-inner">
+    <div class="hero-inner">
+
+        <!-- LEFT CONTENT -->
+        <div class="hero-left">
             <h1>Automate Web Tests with Natural Language</h1>
-            <p class="tagline">Just tell the AI Agent what to test and it handles the rest.</p>
+
+            <p class="tagline">
+                <strong> The AI what to test — it understands, executes, and generates reports automatically.</strong>
+            </p>
+
+            <p class="hero-description">
+                No coding. No manual testing. Just describe your test in plain English and let the AI 
+                agent handle everything — from understanding your intent to executing real 
+                browser actions and generating detailed reports with screenshots.
+            </p>
+
+            <button class="primary hero-btn" onclick="scrollToWorkspace()">
+                🚀 Test a Website
+            </button>
+        </div>
+
+        <!-- RIGHT IMAGE -->
+        <div class="hero-image">
+            <img src="https://images.openai.com/static-rsc-4/qSfUAasw12daJC_VsQXs2tSqvf-uQCRoRje_WkGj4GuWKs99EfvYNG85NTqzm2ERp-Qfp4-WjPyejWXgqRK2A4LUL3bP9GH_zqlk7KJS0Q_FIYwtl6U96PbGNfotEX32mkqjf-EOf1Ph0GsDhGrxGDQTqfrYXIX-9dbbyoXUWJr3lUL3y_tPzvdqXT2QMJAX?purpose=fullsize" alt="AI Automation">
+        </div>
+
+    </div>
+</section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+
+        <div class="steps-grid">
+
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+                </div>
+                <div class="step-content">
+                    <span class="step-number">1</span>
+                    <h3>Give Instruction</h3>
+                    <p>
+                        Simply describe your test in natural language like you would explain to a person. 
+                        No coding or technical knowledge required.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png">
+                </div>
+                <div class="step-content">
+                    <span class="step-number">2</span>
+                    <h3>AI Understands</h3>
+                    <p>
+                        Our AI agent analyzes your instruction, breaks it into steps, and prepares 
+                        an execution plan intelligently.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png">
+                </div>
+                <div class="step-content">
+                    <span class="step-number">3</span>
+                    <h3>Execute Test</h3>
+                    <p>
+                        The system runs your test in a real browser environment, interacting with 
+                        elements just like a human user.
+                    </p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-image">
+                    <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png">
+                </div>
+                <div class="step-content">
+                    <span class="step-number">4</span>
+                    <h3>Get Report</h3>
+                    <p>
+                        Instantly receive detailed results, including logs, screenshots, and step-by-step 
+                        execution insights.
+                    </p>
+                </div>
+            </div>
+
         </div>
     </section>
+    <!-- WORKSPACE (YOUR EXISTING TOOL) -->
+    <section class="workspace fade-section" id="workspace">
 
-    <div class="hero-action" style="margin-top:10px;">
-        <div id="suggestionContainer" class="suggestions-box">
-            Suggestions: <span class="loading-text">Loading AI suggestions...</span>
-        </div>
-    </div>
-
-    <section class="workspace">
+        <!-- INPUT PANEL -->
         <div class="panel input-panel">
             <h2>Test Instruction & Target</h2>
-            <p class="subtext">e.g., "type 'Jane Doe' in name field and click Submit"</p>
-            
+            <p class="subtext">
+                e.g., "type 'Jane Doe' in name field and click Submit"
+            </p>
+
             <label for="instruction">Instruction</label>
-            <textarea id="instruction" placeholder="Describe the test case..." rows="4">open google and type weather</textarea>
-            
+            <textarea id="instruction" rows="4">
+open google and type weather
+            </textarea>
+
             <label for="targetUrl">Target URL or Path</label>
-            <input id="targetUrl" type="text" placeholder="https://www.google.com" value="https://www.google.com">
+            <input id="targetUrl" type="text" value="https://www.google.com">
 
             <div class="input-options">
                 <label class="checkbox-container">
                     <input type="checkbox" id="executeMode" checked>
                     <span class="checkmark"></span>
-                    Run in EXECUTE Mode (Requires Playwright)
+                    Run in EXECUTE Mode
                 </label>
-                <a href="/test" target="_blank" class="secondary small">View Local Test Page</a>
+
+                <!--<a href="/test" target="_blank" class="secondary small">
+                    View Local Test Page
+                </a>-->
             </div>
 
             <div class="action-buttons">
@@ -57,38 +153,50 @@
             </div>
         </div>
 
+        <!-- OUTPUT PANEL -->
         <div class="panel output-panel">
-            <h2>Run Output / Logs</h2>
+            <h2>Run Output</h2>
+
             <div id="resultContainer" class="output-box">
-                <div class="empty-state">No output yet. Run a test above!</div>
+                <div class="empty-state">
+                    No output yet. Run a test above!
+                </div>
             </div>
-            <div class="status-bar" id="status">Status: Waiting for input...</div>
+
+            <div class="status-bar" id="status">
+                Status: Waiting for input...
+            </div>
         </div>
+
     </section>
-    
+
+    <!-- HISTORY -->
     <section class="panel" id="historyPanel" style="margin-top: 24px;">
-        <h2>Previous Runs History</h2>
-        <p class="subtext">Last 10 test runs from SQLite database.</p>
-        
+        <h2>Previous Runs</h2>
+
         <div class="history-controls">
             <input id="historySearch" type="text" placeholder="Search history...">
+
             <select id="historyStatusFilter">
-                <option value="ALL">All Statuses</option>
+                <option value="ALL">All</option>
                 <option value="executed">Passed</option>
                 <option value="error">Failed</option>
             </select>
         </div>
-        
+
         <div id="historyContainer" class="history-list">
             <p class="loading-text">Loading history...</p>
         </div>
     </section>
+
 </div>
 
+<!-- FOOTER -->
 <footer class="site-footer">
-    <p>&copy; 2025 AI Testing Agent Project</p>
+    <p>&copy; 2025 AI Testing Agent</p>
 </footer>
 
 <script src="/static/script.js"></script>
+
 </body>
 </html>

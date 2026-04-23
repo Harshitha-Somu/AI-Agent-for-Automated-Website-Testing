@@ -84,22 +84,27 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         (data.step_results || []).forEach(step => {
-            html += `
-                <div class="step-card">
-                    <p>
-                        <b>Step ${step.step}:</b> ${step.action}
-                        <span class="status-tag ${step.status}">
-                            ${step.status}
-                        </span>
-                    </p>
-                    ${step.detail ? `<p>${step.detail}</p>` : ''}
-                    ${step.screenshot ? `
-                        <img src="${step.screenshot}"
-                             style="width:100%;margin-top:8px;">
-                    ` : ''}
-                </div>
-            `;
-        });
+    html += `
+    <div class="step-card">
+        <div class="step-header">
+            <span>Step ${step.step}</span>
+            <span class="status-tag ${step.status}">
+                ${step.status.toUpperCase()}
+            </span>
+        </div>
+
+        <div>
+            <b>Action:</b> ${step.action}
+            ${step.detail ? `<p>${step.detail}</p>` : ""}
+        </div>
+
+        ${step.screenshot ? `
+            <img src="${step.screenshot}"
+                 style="width:100%;border-radius:10px;margin-top:10px;">
+        ` : ""}
+    </div>
+    `;
+});
 
         html += `</div>`;
         outputEl.innerHTML = html;
@@ -121,7 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
         statusEl.textContent =
             mode === 'execute' ? 'Executing...' : 'Simulating...';
 
-        outputEl.innerHTML = 'Running test...';
+        outputEl.innerHTML = `
+<div style="opacity:0.7; line-height:1.6;">
+  🤖 AI is analyzing instruction...<br>
+  ⚙️ Generating steps...<br>
+  🚀 Executing test...
+</div>
+`;
 
         try {
             const res = await fetch('/api/run_test', {
@@ -167,3 +178,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadHistory();
 });
+
+
+
+
+function scrollToWorkspace() {
+    document.getElementById("workspace").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+function revealOnScroll() {
+    const sections = document.querySelectorAll(".fade-section");
+
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top < window.innerHeight * 0.85) {
+            section.classList.add("visible");
+        }
+    });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
