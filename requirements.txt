@@ -9,14 +9,15 @@ langchain-community==0.2.10
 # Browser automation
 playwright==1.41.0
 
-# PDF report
+# PDF report (keep — but ok)
 reportlab==4.0.8
 
 # Utilities
 requests==2.31.0
-beautifulsoup4==4.12.2
-lxml==4.9.3
 python-dotenv==1.0.0
 
 # Production server
 gunicorn==21.2.0
+
+# 🔥 IMPORTANT FIX
+greenlet==3.0.3
