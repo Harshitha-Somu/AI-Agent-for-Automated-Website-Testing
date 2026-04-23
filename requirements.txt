@@ -1,23 +1,15 @@
 Flask==3.0.0
 flask-cors==4.0.0
 
-# AI Agent
 langgraph==0.2.28
 langchain==0.2.16
 langchain-community==0.2.10
 
-# Browser automation
 playwright==1.41.0
 
-# PDF report (keep — but ok)
 reportlab==4.0.8
 
-# Utilities
 requests==2.31.0
 python-dotenv==1.0.0
 
-# Production server
 gunicorn==21.2.0
-
-# 🔥 IMPORTANT FIX
-greenlet==3.0.3
