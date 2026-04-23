@@ -45,5 +45,6 @@ __pycache__/
 chromedriver
 geckodriver
 
-
+static/reports/
+static/screenshots/
 .env
