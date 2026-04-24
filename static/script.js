@@ -201,3 +201,32 @@ function revealOnScroll() {
 
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
+
+
+const section = document.querySelector(".how-it-works");
+
+window.addEventListener("scroll", () => {
+    const sectionTop = section.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight - 100;
+
+    if (sectionTop < triggerPoint) {
+        section.classList.add("show");
+    }
+});
+
+
+window.onload = () => {
+    window.scrollTo(0, 0);
+};
+
+window.onload = function () {
+    document.querySelector("textarea").value = "";
+    document.querySelector("input").value = "";
+};
+window.onload = function () {
+    localStorage.removeItem("instruction");
+    localStorage.removeItem("target");
+
+    document.querySelector("textarea").value = "";
+    document.querySelector("input").value = "";
+};
