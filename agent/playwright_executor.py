@@ -11,7 +11,11 @@ def run_test_executor(steps, target):
     run_id = int(time.time() * 1000)  # unique screenshots per run
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=True,args=[
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu"
+    ])
 
         context = browser.new_context(
             viewport={"width": 1280, "height": 720},
