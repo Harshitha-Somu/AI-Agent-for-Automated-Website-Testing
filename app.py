@@ -32,12 +32,13 @@ def api_history():
         history = get_run_history(limit=10)
         return jsonify(history if history else [])
     except Exception as e:
-        print(traceback.format_exc())
-
+        error_msg = traceback.format_exc()
+        print(error_msg)
         return jsonify({
-        "status": "error",
-        "message": str(e)
-    }), 500
+            "status": "error",
+            "error": str(e),
+            "traceback": error_msg
+        }), 500
 
 
 # -----------------------------------
