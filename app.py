@@ -139,11 +139,12 @@ def download_pdf(run_id):
 # -----------------------------------
 # APP ENTRY POINT
 # -----------------------------------
+# Initialize database
+init_db()
+
+# Ensure folders exist
+os.makedirs("static/screenshots", exist_ok=True)
+os.makedirs("static/reports", exist_ok=True)
+
 if __name__ == "__main__":
-    init_db()
-
-    # Ensure folders exist
-    os.makedirs("static/screenshots", exist_ok=True)
-    os.makedirs("static/reports", exist_ok=True)
-
     app.run(host="0.0.0.0", port=10000)
