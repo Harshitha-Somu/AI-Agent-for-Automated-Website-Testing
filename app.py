@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import traceback
 
 from flask import Flask, request, jsonify, send_from_directory, send_file
 
@@ -30,8 +31,13 @@ def api_history():
     try:
         history = get_run_history(limit=10)
         return jsonify(history if history else [])
-    except Exception:
-        return jsonify([])
+    except Exception as e:
+        print(traceback.format_exc())
+
+        return jsonify({
+        "status": "error",
+        "message": str(e)
+    }), 500
 
 
 # -----------------------------------
