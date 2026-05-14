@@ -2,7 +2,6 @@ import os
 import time
 import json
 import traceback
-
 from flask import Flask, request, jsonify, send_from_directory, send_file
 
 from agent.base_agent import create_agent
@@ -31,14 +30,8 @@ def api_history():
     try:
         history = get_run_history(limit=10)
         return jsonify(history if history else [])
-    except Exception as e:
-        error_msg = traceback.format_exc()
-        print(error_msg)
-        return jsonify({
-            "status": "error",
-            "error": str(e),
-            "traceback": error_msg
-        }), 500
+    except Exception:
+        return jsonify([])
 
 
 # -----------------------------------
@@ -82,6 +75,13 @@ def api_run_test():
         return jsonify({"result": report})
 
     except Exception as e:
+
+        tb = traceback.format_exc()
+
+        print("========== ERROR ==========")
+        print(tb)
+        print("===========================")
+
         return jsonify({
             "result": {
                 "id": "ERR",
@@ -91,7 +91,8 @@ def api_run_test():
                 "passed_steps": 0,
                 "failed_steps": 0,
                 "step_results": [],
-                "message": str(e)
+                "message": str(e),
+                "traceback": tb
             }
         }), 500
 
