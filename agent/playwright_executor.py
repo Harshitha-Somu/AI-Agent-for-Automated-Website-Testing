@@ -13,7 +13,6 @@ def run_test_executor(steps, target):
     with sync_playwright() as p:
         browser = p.chromium.launch(
         headless=True,
-        executable_path="/opt/render/.cache/ms-playwright/chromium-1097/chrome-linux/chrome",
         args=[
             "--no-sandbox",
             "--disable-dev-shm-usage",
