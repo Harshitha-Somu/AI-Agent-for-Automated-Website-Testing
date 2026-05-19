@@ -9,7 +9,7 @@ def run_test_executor(steps, target):
     os.makedirs(ss_dir, exist_ok=True)
 
     run_id = int(time.time() * 1000)  # unique screenshots per run
-
+    os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "0"
     with sync_playwright() as p:
         browser = p.chromium.launch(
         headless=True,
