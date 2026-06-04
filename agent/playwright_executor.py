@@ -12,15 +12,19 @@ def run_test_executor(steps, target):
     os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "0"
     with sync_playwright() as p:
         browser = p.chromium.launch(
-        headless=True,
-        args=[
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu"
-        ])
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+                "--single-process",
+                "--disable-setuid-sandbox",
+                "--no-zygote"
+            ]
+        )
 
         context = browser.new_context(
-            viewport={"width": 1280, "height": 720},
+            viewport={"width": 900, "height": 600},
             ignore_https_errors=True
         )
 
@@ -37,7 +41,7 @@ def run_test_executor(steps, target):
 
             page.goto(target, wait_until="domcontentloaded", timeout=30000)
 
-        time.sleep(2)
+        time.sleep(0.5)
 
         # ---------------------------------
         # AMAZON CONTINUE SHOPPING HANDLER
@@ -47,7 +51,7 @@ def run_test_executor(steps, target):
                 if page.locator("text=Continue shopping").count() > 0:
                     page.click("text=Continue shopping", timeout=10000)
                     page.wait_for_load_state("domcontentloaded")
-                    time.sleep(2)
+                    time.sleep(0.5)
         except Exception:
             pass
 
@@ -99,7 +103,7 @@ def run_test_executor(steps, target):
                 elif action == "press":
                     page.keyboard.press(value)
 
-                time.sleep(1)
+                time.sleep(0.5)
 
                 screenshot_name = f"run_{run_id}_step_{i + 1}.png"
                 page.screenshot(path=os.path.join(ss_dir, screenshot_name))
