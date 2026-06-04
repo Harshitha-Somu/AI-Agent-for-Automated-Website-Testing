@@ -39,9 +39,14 @@ def run_test_executor(steps, target):
             if not target.startswith("http"):
                 target = "https://" + target
 
-            page.goto(target, wait_until="domcontentloaded", timeout=30000)
+            page.goto(
+                target,
+                wait_until="domcontentloaded",
+                timeout=60000
+            )
+            page.wait_for_timeout(3000)
 
-        time.sleep(0.5)
+        page.wait_for_timeout(1000)
 
         # ---------------------------------
         # AMAZON CONTINUE SHOPPING HANDLER
@@ -51,7 +56,7 @@ def run_test_executor(steps, target):
                 if page.locator("text=Continue shopping").count() > 0:
                     page.click("text=Continue shopping", timeout=10000)
                     page.wait_for_load_state("domcontentloaded")
-                    time.sleep(0.5)
+                    page.wait_for_timeout(1000)
         except Exception:
             pass
 
@@ -68,7 +73,8 @@ def run_test_executor(steps, target):
 
                     if "amazon" in url:
                         selectors = [
-                            "input#twotabsearchtextbox",
+                            "#twotabsearchtextbox",
+                            "input[name='field-keywords']",
                             "input[aria-label='Search Amazon']"
                         ]
                     elif "google" in url:
@@ -88,10 +94,9 @@ def run_test_executor(steps, target):
                     filled = False
                     for sel in selectors:
                         try:
-                            page.wait_for_selector(sel, timeout=15000)
+                            page.wait_for_selector(sel, timeout=30000)
                             page.click(sel)
-                            page.fill(sel, "")
-                            page.type(sel, value, delay=60)
+                            page.fill(sel, value)
                             filled = True
                             break
                         except TimeoutError:
@@ -103,7 +108,7 @@ def run_test_executor(steps, target):
                 elif action == "press":
                     page.keyboard.press(value)
 
-                time.sleep(0.5)
+                page.wait_for_timeout(1000)
 
                 screenshot_name = f"run_{run_id}_step_{i + 1}.png"
                 page.screenshot(path=os.path.join(ss_dir, screenshot_name))
