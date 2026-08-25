@@ -1,4 +1,5 @@
 # test_agent_execute.py
+"""
 from agent.base_agent import create_agent
 
 # Initialize agent
@@ -28,3 +29,29 @@ for step in result.get("step_results", []):
 if result.get('status') == 'error_analyzed':
     print("\n--- FAILURE ANALYSIS ---")
     print(result['failure_analysis_report'])
+
+"""
+
+from agent.base_agent import create_agent
+
+agent = create_agent()
+
+input_state = {
+    "instruction": 'search for "Playwright"',
+    "target": "https://www.wikipedia.org",
+    "mode": "execute",
+}
+
+print("Running universal website test...")
+result = agent.invoke(input_state)
+
+print("\n--- TEST REPORT ---")
+print(f"Status: {result.get('status')}")
+print(f"Duration: {result.get('duration', 0)}s")
+print(f"Total Steps: {result.get('total_steps')}")
+print(f"Passed Steps: {result.get('passed_steps')}")
+print(f"Failed Steps: {result.get('failed_steps')}")
+
+for step in result.get("step_results", []):
+    screenshot_link = f"(Screenshot: {step['screenshot']})" if step.get('screenshot') else ""
+    print(f"  Step {step['step']} ({step['status']}): {step['action']} {screenshot_link}")
