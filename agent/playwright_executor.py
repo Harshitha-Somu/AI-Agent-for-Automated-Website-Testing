@@ -331,6 +331,7 @@ def run_test_executor(steps, target, planner=None, instruction=""):
                 "--no-sandbox",
                 "--disable-dev-shm-usage",
                 "--disable-gpu",
+                "--disable-software-rasterizer",
                 "--disable-extensions",
                 "--disable-background-networking",
             ],
