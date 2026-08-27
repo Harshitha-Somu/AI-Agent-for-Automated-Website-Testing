@@ -322,10 +322,17 @@ def run_test_executor(steps, target, planner=None, instruction=""):
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
+            #args=[
+             #   "--disable-dev-shm-usage",
+              #  "--no-sandbox",
+              #  "--disable-gpu",
+           # ],
             args=[
-                "--disable-dev-shm-usage",
                 "--no-sandbox",
+                "--disable-dev-shm-usage",
                 "--disable-gpu",
+                "--disable-extensions",
+                "--disable-background-networking",
             ],
         )
         context = browser.new_context(
